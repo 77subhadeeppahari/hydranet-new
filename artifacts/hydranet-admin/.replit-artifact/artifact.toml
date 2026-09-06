@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/admin/"
+title = "Hydranet Admin ERP"
+description = "A secure internal management portal for Hydranet Broadband with role-aware dashboard views, plan management, team administration, attendance, expenses, reporting, and audit activity."
+version = "1.0.0"
+id = "artifacts/hydranet-admin"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/admin/" ]
+localPort = 20627
+
+[services.development]
+run = "pnpm --filter @workspace/hydranet-admin run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/hydranet-admin", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/hydranet-admin/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20627"
+BASE_PATH = "/admin/"
