@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Hydranet Broadband"
+description = "A high-performance broadband provider website for Hydranet Broadband, showcasing fiber plans, enterprise connectivity, partner opportunities, coverage, and customer support."
+version = "1.0.0"
+id = "artifacts/hydranet-broadband"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25851
+
+[services.development]
+run = "pnpm --filter @workspace/hydranet-broadband run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/hydranet-broadband", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/hydranet-broadband/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25851"
+BASE_PATH = "/"
