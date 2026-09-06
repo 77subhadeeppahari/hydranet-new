@@ -1,0 +1,12 @@
+- [API Zod codegen compatibility](api-zod-codegen.md) — generated validators currently require Zod 4, separate from the workspace Zod 3 catalog.
+- [Admin integration test boundaries](admin-integration-tests.md) — mutation responses must use singular validators and be exercised through the real database-backed HTTP flow.
+- [Activity metadata compatibility](activity-metadata-compatibility.md) — optional audit metadata must accept nulls so legacy activity rows remain valid API responses.
+- [Payroll source of truth](hr-payroll-decisions.md) — payroll totals and payslip values are calculated and persisted on the server, not trusted from the admin UI.
+- [Attendance refresh caching](attendance-refresh-caching.md) — punch terminal queries must bypass 304 caching so the current punch state stays visible.
+- [Customer ledger and workbook import](customer-ledger-import.md) — due is server-derived; existing RADIUS accounts update and duplicate workbook rows report errors.
+- [Admin deletion safety](admin-deletion-safety.md) — customer deletion cascades its ledger; historical team members must be suspended instead of hard-deleted.
+- [Partner agreement PDF](partner-agreement-pdf.md) — preserve the uploaded blank-field template and copy it into the API build for runtime PDF overlays.
+- [Superadmin SMTP settings](smtp-settings.md) — ERP SMTP delivery uses one encrypted configuration record restricted to Superadmin accounts.
+- [Partner directory Staff access](partner-staff-access.md) — Staff can view partner records and documents, but Admin/Superadmin-only mutations protect the legal workflow.
+- [Public photo URL contract](public-photo-url-contract.md) — public profile photo URLs are relative API paths, so OpenAPI must not enforce absolute URI formatting.
+- [GitHub connector write limits](github-connector-write-limits.md) — bursty GitHub REST/GraphQL writes can trigger temporary Cloudflare 403s; use small batches with cooldowns.
